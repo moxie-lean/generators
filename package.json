@@ -1,0 +1,32 @@
+{
+  "name": "generator-leean",
+  "version": "0.1.0",
+  "description": "Set of generators used for Leean libs.",
+  "author": "Crisoforo Gaspar <hello@crisoforo.com>",
+  "files": [
+    "generators/php-lib"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moxie-leean/generators.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "leean",
+    "PHP",
+    "WordPress"
+  ],
+  "author": "Crisoforo Gaspar Hernandez <hello@crisoforo.com> (http://crisoforo.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/moxie-leean/generators/issues"
+  },
+  "homepage": "https://github.com/moxie-leean/generators#readme",
+  "dependencies": {
+    "yeoman-generator": "^0.22.5",
+    "yosay": "^1.1.0"
+  }
+}
