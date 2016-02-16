@@ -2,8 +2,10 @@
   "name": "generator-leean",
   "version": "0.1.0",
   "description": "Set of generators used for Leean libs.",
-  "author": "Crisoforo Gaspar <hello@crisoforo.com>",
+  "author": "Crisoforo Gaspar Hernandez <hello@crisoforo.com> (http://crisoforo.com/)",
+  "main": "app/index.js",
   "files": [
+    "generators/app",
     "generators/php-lib"
   ],
   "scripts": {
@@ -19,7 +21,6 @@
     "PHP",
     "WordPress"
   ],
-  "author": "Crisoforo Gaspar Hernandez <hello@crisoforo.com> (http://crisoforo.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/moxie-leean/generators/issues"
