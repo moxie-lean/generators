@@ -9,5 +9,9 @@ before_script:
   - composer update --prefer-lowest -n
   - composer update -n
 
+cache:
+  directories:
+  - vendor
+
 script:
   - composer test
