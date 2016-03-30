@@ -13,7 +13,7 @@ npm install -g lean-generator
 ## Update generator to the last version
     
 ```bash
-npm Updatee -g lean-generator
+npm update -g lean-generator
 ```
 
 ## List of available sub commands.
