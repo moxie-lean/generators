@@ -1,7 +1,7 @@
 {
   "name": "lean-generator",
   "version": "0.2.4",
-  "description": "Set of generators used for Leean libs.",
+  "description": "Set of generators used for Lean libs.",
   "author": "Crisoforo Gaspar Hernandez <hello@crisoforo.com> (http://crisoforo.com/)",
   "main": "app/index.js",
   "files": [
