@@ -1,4 +1,4 @@
-# Leean generators
+# Lean generators
 
 > Set of generators to speed things a bit for some repetitive tasks.
 
@@ -7,13 +7,13 @@
 To install the generator:
 
 ```bash
-npm install -g generator-leean
+npm install -g lean-generator
 ```
 
 ## Update generator to the last version
     
 ```bash
-npm Updatee -g generator-leean
+npm Updatee -g lean-generator
 ```
 
 ## List of available sub commands.
