@@ -1,5 +1,5 @@
 {
-  "name": "moxie-leean/<%= name %>",
+  "name": "moxie-lean/<%= name %>",
   "description": "<%= description %>",
   "keywords": [<%= keywords %>],
   "homepage": "<%= homepage %>",
@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Leean\\": "src/"
+      "Lean\\": "src/"
     }
   },
   "require-dev": {
