@@ -1,4 +1,4 @@
-# yo leean:php-lib
+# yo lean:php-lib
 
 > This generator is useful to generate new PHP libs with the same files
  used across other PHP libraries.
@@ -6,7 +6,7 @@
 To run this command just type on the terminal: 
 
 ```bash
-yo leean:php-lib
+yo lean:php-lib
 ```
 
 This command will ask for small things to set up the composer library in

@@ -1,1 +1,1 @@
-<?php namespace Leean;
+<?php namespace Lean;
