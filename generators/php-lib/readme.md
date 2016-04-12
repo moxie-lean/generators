@@ -6,7 +6,7 @@
 To run this command just type on the terminal: 
 
 ```bash
-yo lean:php-lib
+yo moxie-lean:php-lib
 ```
 
 This command will ask for small things to set up the composer library in
