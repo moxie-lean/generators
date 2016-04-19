@@ -19,3 +19,4 @@ npm update -g generator-moxie-lean
 ## List of available sub commands.
 
 - [php-lib](https://github.com/moxie-leean/generators/tree/master/generators/php-lib): Command to generate files from a PHP library with files like: composer, codesniffer and others.
+- [new-wp](https://github.com/moxie-leean/generators/tree/master/generators/new-wp): Generates the config for a new WordPress project and initialises Git.
