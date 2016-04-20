@@ -7,13 +7,13 @@
 To install the generator:
 
 ```bash
-npm install -g generator-moxie-lean
+npm install -g moxie-lean
 ```
 
 ## Update generator to the last version
     
 ```bash
-npm update -g generator-moxie-lean
+npm update -g moxie-lean
 ```
 
 ## List of available sub commands.
