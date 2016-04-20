@@ -19,7 +19,7 @@ module.exports = generators.Base.extend({
         message: 'The project repo uri (leave blank to skip github setup-up)',
         default: '',
         validate: function( input ) {
-          return input.trim() === '' || /github.com|bitbucket.org/g.test( input );
+          return /^$|github.com|bitbucket.org/g.test( input );
         }
       }
     ];
