@@ -39,7 +39,7 @@ module.exports = generators.Base.extend({
     );
 
     this.fs.copyTpl(
-      this.templatePath('.travis.yml'),
+      this.templatePath('travis.yml'),
       this.destinationPath('./.travis.yml'),
       {
         name: this.name
@@ -47,7 +47,7 @@ module.exports = generators.Base.extend({
     );
 
     this.fs.copyTpl(
-      this.templatePath('.gitignore'),
+      this.templatePath('gitignore'),
       this.destinationPath('./.gitignore'),
       {
         name: this.name
