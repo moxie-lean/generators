@@ -18,7 +18,7 @@ module.exports = generators.Base.extend({
         name: 'repo',
         message: 'The project repo uri (set it up in GitHub/Bitbucket first!)',
         validate: function( input ) {
-          return input.indexOf('github.com') > -1 || input.indexOf('bitbucket.org') > -1;
+          return /github.com|bitbucket.org/g.test( input );
         }
       }
     ];
