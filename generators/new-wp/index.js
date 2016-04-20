@@ -16,9 +16,10 @@ module.exports = generators.Base.extend({
       },
       {
         name: 'repo',
-        message: 'The project repo uri (set it up in GitHub/Bitbucket first!)',
+        message: 'The project repo uri (leave blank to skip github setup-up)',
+        default: '',
         validate: function( input ) {
-          return /github.com|bitbucket.org/g.test( input );
+          return input.trim() === '' || /github.com|bitbucket.org/g.test( input );
         }
       }
     ];
@@ -56,12 +57,14 @@ module.exports = generators.Base.extend({
   },
 
   install: function() {
-    this.spawnCommandSync('git', ['init']);
-    this.spawnCommandSync('git', ['add', '--all']);
-    this.spawnCommandSync('git', ['commit', '-m', 'Initial commit', '--quiet']);
-    this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repo]);
-    this.spawnCommandSync('git', ['push', '-u', 'origin', 'master']);
-    this.spawnCommandSync('git', ['checkout', '-b', 'develop']);
-    this.spawnCommandSync('git', ['push', '--set-upstream', 'origin', 'develop']);
+    if( this.repo ) {
+      this.spawnCommandSync('git', ['init']);
+      this.spawnCommandSync('git', ['add', '--all']);
+      this.spawnCommandSync('git', ['commit', '-m', 'Initial commit', '--quiet']);
+      this.spawnCommandSync('git', ['remote', 'add', 'origin', this.repo]);
+      this.spawnCommandSync('git', ['push', '-u', 'origin', 'master']);
+      this.spawnCommandSync('git', ['checkout', '-b', 'develop']);
+      this.spawnCommandSync('git', ['push', '--set-upstream', 'origin', 'develop']);
+    }
   }
 });
