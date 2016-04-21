@@ -1,3 +1,5 @@
+require('../../shared/string');
+var shared = require('../../shared/functions');
 var generators = require('yeoman-generator');
 
 module.exports = generators.Base.extend({
@@ -9,22 +11,22 @@ module.exports = generators.Base.extend({
       {
         name: 'name',
         message: 'The name of this project',
-        default: this.destinationRoot().split('/').pop(),
+        default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
-          return input.trim() !== '';
+          return !input.isEmpty();
         }
       },
       {
         name: 'repo',
-        message: 'The project repo uri (leave blank to skip github setup-up)',
+        message: 'The project repo uri (leave blank to skip github/bitbucket setup-up)',
         default: '',
         validate: function( input ) {
-          return /^$|github.com|bitbucket.org/g.test( input );
+          return input.isBlankOrGitOrBit()
         }
       }
     ];
     this.prompt(questions, function(answers) {
-      this.name = answers.name.toLowerCase().trim().replace(/\s/g, '-');
+      this.name = answers.name.toLowerHyphenated();
       this.repo = answers.repo;
       done();
     }.bind(this));

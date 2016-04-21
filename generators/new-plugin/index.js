@@ -1,3 +1,5 @@
+require('../../shared/string');
+var shared = require('../../shared/functions');
 var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
 var rimraf = require( 'rimraf' );
@@ -19,14 +21,14 @@ module.exports = generators.Base.extend({
       {
         name: 'name',
         message: 'The name of this project',
-        default: this.destinationRoot().split('/').pop(),
+        default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
-          return input.trim() !== '';
+          return !input.isEmpty();
         }
       }
     ];
     this.prompt(questions, function(answers) {
-      this.name = answers.name.toLowerCase().trim().replace(/\s/g, '-');
+      this.name = answers.name.toLowerHyphenated();
       done();
     }.bind(this));
   },
@@ -38,7 +40,6 @@ module.exports = generators.Base.extend({
     if ( fs.existsSync(this.THEME_FOLDER) ) {
       if( fs.readdirSync(this.THEME_FOLDER).length ) {
         console.log('The theme folder already has some files!');
-        done();
         return;
       }
     } else {
@@ -73,27 +74,25 @@ module.exports = generators.Base.extend({
       recursive: true,
       silent: true
     };
-
-    var capitalizedName = this.name.replace(/-/g, ' ')
-      .replace( /\b\w/g, function (m) {
-        return m.toUpperCase();
-      })
-      .replace(/\s/g, '');
+console.log(this.name.toCapitalizeUnhyphenated());
     replace( merge({
       regex: 'Leanp',
-      replacement: capitalizedName
+      replacement: this.name.toCapitalizeUnhyphenated()
     }, settings) );
 
-    var uppercaseName = this.name.replace(/\W+/g, '').toUpperCase();
     replace( merge({
       regex: 'LEANP',
-      replacement: uppercaseName
+      replacement: this.name.toUpperCaseUnhyphenated()
     }, settings) );
 
-    var lowercaseName = this.name.replace(/\W+/g, '').toLowerCase();
     replace( merge({
       regex: 'leanp',
-      replacement: lowercaseName
+      replacement: this.name.toLowerCaseUnhyphenated()
+    }, settings) );
+
+    replace( merge({
+      regex: 'lean-p',
+      replacement: this.name
     }, settings) );
   },
 
