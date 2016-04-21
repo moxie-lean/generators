@@ -10,7 +10,7 @@ var merge = require('merge');
 module.exports = generators.Base.extend({
 
   initializing: function () {
-    this.THEME_FOLDER = './wp-content/themes/';
+    this.PLUGIN_FOLDER = this.destinationRoot() + '/wp-content/plugins/';
     this.PLUGIN_GIT_URI = 'git@github.com:moxie-leean/wp-plugin.git';
   },
 
@@ -20,7 +20,7 @@ module.exports = generators.Base.extend({
     var questions = [
       {
         name: 'name',
-        message: 'The name of this project',
+        message: 'The name of the plugin',
         default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
           return !input.isEmpty();
@@ -34,20 +34,20 @@ module.exports = generators.Base.extend({
   },
 
   writing: function() {
-    this.THEME_FOLDER += this.name;
-    console.log('Creating theme in ' + this.THEME_FOLDER);
+    this.PLUGIN_FOLDER += this.name;
+    console.log('Creating theme in ' + this.PLUGIN_FOLDER);
 
-    if ( fs.existsSync(this.THEME_FOLDER) ) {
-      if( fs.readdirSync(this.THEME_FOLDER).length ) {
+    if ( fs.existsSync(this.PLUGIN_FOLDER) ) {
+      if( fs.readdirSync(this.PLUGIN_FOLDER).length ) {
         console.log('The theme folder already has some files!');
         return;
       }
     } else {
       console.log('Creating the folder first');
-      mkdirp.sync(this.THEME_FOLDER);
+      mkdirp.sync(this.PLUGIN_FOLDER);
     }
 
-    process.chdir( this.THEME_FOLDER );
+    process.chdir( this.PLUGIN_FOLDER );
 
     this._downloadPlugin();
 
@@ -59,11 +59,9 @@ module.exports = generators.Base.extend({
 
     this.spawnCommandSync('git', ['clone', '--depth=1', this.PLUGIN_GIT_URI, '.']);
 
-    rimraf('.git', function(err) {
-      if (err) {
-        console.log(err);
-      }
-    });
+    console.log('Cleaning up Git folder...');
+
+    this.spawnCommandSync('rm', ['-rf', '.git']);
   },
 
   _replaceInPlugin: function() {
@@ -74,7 +72,7 @@ module.exports = generators.Base.extend({
       recursive: true,
       silent: true
     };
-console.log(this.name.toCapitalizeUnhyphenated());
+
     replace( merge({
       regex: 'Leanp',
       replacement: this.name.toCapitalizeUnhyphenated()
@@ -97,6 +95,8 @@ console.log(this.name.toCapitalizeUnhyphenated());
   },
 
   install: function() {
+    process.chdir( this.PLUGIN_FOLDER );
+
     this.spawnCommandSync('composer', ['update']);
   }
 });
