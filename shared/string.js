@@ -2,11 +2,11 @@ String.prototype.isEmpty = function() {
   return this.trim() === '';
 };
 
-String.prototype.isBlankOrGitOrBit = function() {
-  return /^$|github.com|bitbucket.org/g.test(this);
+String.prototype.isValidRepo = function() {
+  return /github.com|bitbucket.org/g.test(this);
 };
 
-String.prototype.toLowerHyphenated = function() {
+String.prototype.toCleanProjectName = function() {
   return this.toLowerCase().trim().replace(/\s/g, '-');
 };
 

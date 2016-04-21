@@ -21,12 +21,12 @@ module.exports = generators.Base.extend({
         message: 'The project repo uri (leave blank to skip github/bitbucket setup-up)',
         default: '',
         validate: function( input ) {
-          return input.isBlankOrGitOrBit()
+          return input.isEmpty() || input.isValidRepo();
         }
       }
     ];
     this.prompt(questions, function(answers) {
-      this.name = answers.name.toLowerHyphenated();
+      this.name = answers.name.toCleanProjectName();
       this.repo = answers.repo;
       done();
     }.bind(this));
