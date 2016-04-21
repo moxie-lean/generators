@@ -26,7 +26,7 @@ module.exports = generators.Base.extend({
       }
     ];
     this.prompt(questions, function(answers) {
-      this.name = answers.name.toCleanProjectName();
+      this.name = answers.name.cleanProjectName();
       this.repo = answers.repo;
       done();
     }.bind(this));
