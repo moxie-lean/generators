@@ -1,4 +1,4 @@
-# yo lean:php-lib
+# yo moxie-lean:php-lib
 
 > This generator is useful to generate new PHP libs with the same files
  used across other PHP libraries.

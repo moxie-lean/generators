@@ -1,4 +1,4 @@
-# yo lean:new-wp
+# yo moxie-lean:new-wp
 
 > Generates the config we need for a WordPress project.
 
