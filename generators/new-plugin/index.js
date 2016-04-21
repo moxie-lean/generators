@@ -54,7 +54,7 @@ module.exports = generators.Base.extend({
   },
 
   _downloadPlugin: function() {
-    console.log('Downloading theme files...');
+    console.log('Downloading plugin files...');
 
     this.spawnCommandSync('git', ['clone', '--depth=1', this.PLUGIN_GIT_URI, '.']);
 
