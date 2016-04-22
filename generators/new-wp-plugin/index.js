@@ -28,7 +28,7 @@ module.exports = generators.Base.extend({
       }
     ];
     this.prompt(questions, function(answers) {
-      this.name = answers.name.toLowerHyphenated();
+      this.name = answers.name.cleanProjectName();
       done();
     }.bind(this));
   },
@@ -75,17 +75,17 @@ module.exports = generators.Base.extend({
 
     replace( merge({
       regex: 'Leanp',
-      replacement: this.name.toCapitalizeUnhyphenated()
+      replacement: this.name.capitalizeAtHyphens()
     }, settings) );
 
     replace( merge({
       regex: 'LEANP',
-      replacement: this.name.toUpperCaseUnhyphenated()
+      replacement: this.name.removeNonWordChars().toUpperCase()
     }, settings) );
 
     replace( merge({
       regex: 'leanp',
-      replacement: this.name.toLowerCaseUnhyphenated()
+      replacement: this.name.removeNonWordChars().toLowerCase()
     }, settings) );
 
     replace( merge({
