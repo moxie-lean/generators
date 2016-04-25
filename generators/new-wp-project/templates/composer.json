@@ -9,11 +9,17 @@
     "moxie/wp-migrate-db-pro": "dev-master",
     "moxie/wp-migrate-db-pro-media-files": "dev-master",
     "moxie/wp-migrate-db-pro-cli": "dev-master",
-    "yoast/wordpress-seo": "dev-master",
-    "wpackagist-plugin/stream": "dev-trunk",
-    "wpackagist-plugin/postmark-approved-wordpress-plugin": "dev-trunk",
-    "wpackagist-plugin/mainwp-child": "dev-trunk",
-    "wpackagist-plugin/akismet": "dev-trunk"
+    "yoast/wordpress-seo": "*",
+    "wpackagist-plugin/stream": "*",
+    "wpackagist-plugin/regenerate-thumbnails": "*",
+    "wpackagist-plugin/wp-help": "*",
+    "wpackagist-plugin/broken-link-checker": "*",
+    "wpackagist-plugin/postmark-approved-wordpress-plugin": "*",
+    "wpackagist-plugin/mainwp-child": "*",
+    "wpackagist-plugin/akismet": "*"
+  },
+  "script": {
+    "post-update-cmd": "cd wp-content/plugins/wordpress-seo && composer install"
   },
   "authors": [
     {

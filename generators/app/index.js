@@ -8,6 +8,8 @@ module.exports = generators.Base.extend({
     this.log('Try to run: yo moxie-lean:<subcommand> to use any of this generators. List of subcommands');
     this.log('- php-lib');
     this.log('- new-wp');
+    this.log('- new-wp-project');
+    this.log('- new-wp-plugin');
     this.log();
   }
 });

@@ -1,6 +1,6 @@
 # yo moxie-lean:new-wp
 
-> Generates the config we need for a WordPress project.
+> Generates a new WordPress plugin.
 
 To run this command just type on the terminal: 
 
@@ -8,12 +8,4 @@ To run this command just type on the terminal:
 yo moxie-lean:new-wp
 ```
 
-You need to set-up the remote repo first on GitHub or Bitbucket.
-
-This generator creates: 
-
-- A composer.json file
-- A default .gitignore file
-- A .travis.yml file to set up CI.
-
-It then initialises Git and pushes to your remote repo.
+This generator creates a new WordPress project.
