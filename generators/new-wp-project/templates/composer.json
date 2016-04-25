@@ -1,0 +1,43 @@
+{
+  "name": "moxie/<%= name %>",
+  "require": {
+    "php": ">=5.4",
+    "moxie-leean/wp-headless-theme": "dev-master",
+    "moxie/acf": "dev-master",
+    "moxie/gravity-forms": "dev-master",
+    "moxie/gravity-forms-logging": "dev-master",
+    "moxie/wp-migrate-db-pro": "dev-master",
+    "moxie/wp-migrate-db-pro-media-files": "dev-master",
+    "moxie/wp-migrate-db-pro-cli": "dev-master",
+    "yoast/wordpress-seo": "*",
+    "wpackagist-plugin/stream": "*",
+    "wpackagist-plugin/regenerate-thumbnails": "*",
+    "wpackagist-plugin/wp-help": "*",
+    "wpackagist-plugin/broken-link-checker": "*",
+    "wpackagist-plugin/postmark-approved-wordpress-plugin": "*",
+    "wpackagist-plugin/mainwp-child": "*",
+    "wpackagist-plugin/akismet": "*"
+  },
+  "script": {
+    "post-update-cmd": "cd wp-content/plugins/wordpress-seo && composer install"
+  },
+  "authors": [
+    {
+      "name": "Moxie Developers",
+      "email": "developer@getmoxied.net"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://packagist.getmoxied.net"
+    },
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "config": {
+    "secure-http": false
+  }
+}
