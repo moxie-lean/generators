@@ -6,6 +6,9 @@
   "main": "app/index.js",
   "files": [
     "generators/app",
+    "generators/new-wp-plugin",
+    "generators/new-wp-project",
+    "generators/new-wp",
     "generators/php-lib"
   ],
   "scripts": {
