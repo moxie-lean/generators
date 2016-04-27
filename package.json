@@ -1,6 +1,6 @@
 {
   "name": "generator-moxie-lean",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Set of generators used for Lean libs.",
   "author": "Crisoforo Gaspar Hernandez <hello@crisoforo.com> (http://crisoforo.com/)",
   "main": "app/index.js",
