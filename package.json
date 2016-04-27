@@ -9,7 +9,8 @@
     "generators/new-wp-plugin",
     "generators/new-wp-project",
     "generators/new-wp",
-    "generators/php-lib"
+    "generators/php-lib",
+    "shared"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
