@@ -7,6 +7,8 @@ module.exports = generators.Base.extend({
   prompts: function() {
     var done = this.async();
 
+    this.name = this.options.name !== undefined ? this.options.name.cleanProjectName() : undefined;
+
     var questions = [
       {
         name: 'name',
@@ -14,20 +16,23 @@ module.exports = generators.Base.extend({
         default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
           return !input.isEmpty();
-        }
+        },
+        when: function () {
+          return this.name === undefined;
+        }.bind(this)
       },
       {
         name: 'repo',
         message: 'The project repo uri (leave blank to skip github/bitbucket setup-up)',
         default: '',
         validate: function( input ) {
-          return input.isEmpty() || input.isValidRepo()
+          return input.isEmpty() || input.isValidRepo();
         }
       }
     ];
 
     this.prompt(questions, function(answers) {
-      this.name = answers.name.cleanProjectName();
+      this.name = this.name === undefined ? answers.name.cleanProjectName() : this.name;
       this.repo = answers.repo;
       done();
     }.bind(this));
