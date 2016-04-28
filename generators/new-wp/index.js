@@ -5,6 +5,8 @@ var generators = require('yeoman-generator');
 module.exports = generators.Base.extend({
 
   prompts: function() {
+    var done = this.async();
+
     var questions = [
       {
         name: 'name',
@@ -18,11 +20,11 @@ module.exports = generators.Base.extend({
 
     this.prompt(questions, function(answers) {
       this.name = answers.name.cleanProjectName();
-      this._compose();
+      done();
     }.bind(this));
   },
 
-  _compose: function() {
+  compose: function() {
     var options = { options: {
       name: this.name
     }};
