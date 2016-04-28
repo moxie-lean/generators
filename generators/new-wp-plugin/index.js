@@ -17,25 +17,32 @@ module.exports = generators.Base.extend({
   prompts: function() {
     var done = this.async();
 
-    var questions = [
-      {
-        name: 'name',
-        message: 'The name of the plugin',
-        default: shared.getBasename( this.destinationRoot() ),
-        validate: function( input ) {
-          return !input.isEmpty();
+    var name = this.options.name !== undefined ? this.options.name : undefined;
+
+    if ( name === undefined ) {
+      var questions = [
+        {
+          name: 'name',
+          message: 'The name of the plugin',
+          default: shared.getBasename( this.destinationRoot() ),
+          validate: function( input ) {
+            return !input.isEmpty();
+          }
         }
-      }
-    ];
-    this.prompt(questions, function(answers) {
-      this.name = answers.name.cleanProjectName();
+      ];
+      this.prompt(questions, function(answers) {
+        this.name = answers.name.cleanProjectName();
+        done();
+      }.bind(this));
+    } else {
+      this.name = name;
       done();
-    }.bind(this));
+    }
   },
 
   writing: function() {
     this.PLUGIN_FOLDER += this.name;
-    console.log('Creating theme in ' + this.PLUGIN_FOLDER);
+    console.log('Creating plugin in ' + this.PLUGIN_FOLDER);
 
     if ( fs.existsSync(this.PLUGIN_FOLDER) ) {
       if( fs.readdirSync(this.PLUGIN_FOLDER).length ) {
