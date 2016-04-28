@@ -2,14 +2,14 @@ require('../../shared/string');
 var shared = require('../../shared/functions');
 var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
-var rimraf = require( 'rimraf' );
+var rimraf = require('rimraf');
 var fs = require('fs');
 var replace = require('replace');
 var merge = require('merge');
 
 module.exports = generators.Base.extend({
 
-  initializing: function () {
+  initializing: function() {
     this.PLUGIN_FOLDER = this.destinationRoot() + '/wp-content/plugins/';
     this.PLUGIN_GIT_URI = 'git@github.com:moxie-leean/wp-plugin.git';
   },
@@ -17,35 +17,34 @@ module.exports = generators.Base.extend({
   prompts: function() {
     var done = this.async();
 
-    var name = this.options.name !== undefined ? this.options.name : undefined;
+    this.name = this.options.name !== undefined ? this.options.name.cleanProjectName() : undefined;
 
-    if ( name === undefined ) {
-      var questions = [
-        {
-          name: 'name',
-          message: 'The name of the plugin',
-          default: shared.getBasename( this.destinationRoot() ),
-          validate: function( input ) {
-            return !input.isEmpty();
-          }
-        }
-      ];
-      this.prompt(questions, function(answers) {
-        this.name = answers.name.cleanProjectName();
-        done();
-      }.bind(this));
-    } else {
-      this.name = name;
+    var questions = [
+      {
+        name: 'name',
+        message: 'The name of the plugin',
+        default: shared.getBasename(this.destinationRoot()),
+        validate: function(input) {
+          return !input.isEmpty();
+        },
+        when: function() {
+          return this.name === undefined;
+        }.bind(this)
+      }
+    ];
+
+    this.prompt(questions, function(answers) {
+      this.name = this.name === undefined ? answers.name.cleanProjectName() : this.name;
       done();
-    }
+    }.bind(this));
   },
 
   writing: function() {
     this.PLUGIN_FOLDER += this.name;
     console.log('Creating plugin in ' + this.PLUGIN_FOLDER);
 
-    if ( fs.existsSync(this.PLUGIN_FOLDER) ) {
-      if( fs.readdirSync(this.PLUGIN_FOLDER).length ) {
+    if (fs.existsSync(this.PLUGIN_FOLDER)) {
+      if (fs.readdirSync(this.PLUGIN_FOLDER).length) {
         console.log('The theme folder already has some files!');
         return;
       }
@@ -54,7 +53,7 @@ module.exports = generators.Base.extend({
       mkdirp.sync(this.PLUGIN_FOLDER);
     }
 
-    process.chdir( this.PLUGIN_FOLDER );
+    process.chdir(this.PLUGIN_FOLDER);
 
     this._downloadPlugin();
 
@@ -80,29 +79,29 @@ module.exports = generators.Base.extend({
       silent: true
     };
 
-    replace( merge({
+    replace(merge({
       regex: 'Leanp',
       replacement: this.name.capitalizeAtHyphens()
-    }, settings) );
+    }, settings));
 
-    replace( merge({
+    replace(merge({
       regex: 'LEANP',
       replacement: this.name.removeNonWordChars().toUpperCase()
-    }, settings) );
+    }, settings));
 
-    replace( merge({
+    replace(merge({
       regex: 'leanp',
       replacement: this.name.removeNonWordChars().toLowerCase()
-    }, settings) );
+    }, settings));
 
-    replace( merge({
+    replace(merge({
       regex: 'lean-p',
       replacement: this.name
-    }, settings) );
+    }, settings));
   },
 
   install: function() {
-    process.chdir( this.PLUGIN_FOLDER );
+    process.chdir(this.PLUGIN_FOLDER);
 
     this.spawnCommandSync('composer', ['update']);
   }
