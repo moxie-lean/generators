@@ -17,3 +17,9 @@ This generator creates:
 - A .travis.yml file to set up CI.
 
 It then initialises Git and pushes to your remote repo.
+
+It will prompt you for the project name and github/bitbucket repo uri. Alternatively you can pass the name as a CLI argument:
+
+```bash
+yo moxie-lean:new-wp-project --name my-plugin-name
+```
