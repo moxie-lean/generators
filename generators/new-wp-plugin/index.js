@@ -104,5 +104,9 @@ module.exports = generators.Base.extend({
     process.chdir(this.PLUGIN_FOLDER);
 
     this.spawnCommandSync('composer', ['update']);
+  },
+
+  end: function() {
+    console.log('** The plugin is all set! **')
   }
 });

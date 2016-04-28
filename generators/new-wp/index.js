@@ -22,7 +22,7 @@ module.exports = generators.Base.extend({
     }.bind(this));
   },
 
-  _compose: function () {
+  _compose: function() {
     var options = { options: {
       name: this.name
     }};

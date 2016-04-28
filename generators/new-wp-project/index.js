@@ -78,5 +78,9 @@ module.exports = generators.Base.extend({
       this.spawnCommandSync('git', ['checkout', '-b', 'develop']);
       this.spawnCommandSync('git', ['push', '--set-upstream', 'origin', 'develop']);
     }
+  },
+
+  end: function() {
+    console.log('** The project is ready to roll! **')
   }
 });
