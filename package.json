@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moxie-leean/generators.git"
+    "url": "git+https://github.com/moxie-lean/generators.git"
   },
   "keywords": [
     "yeoman-generator",
@@ -27,9 +27,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/moxie-leean/generators/issues"
+    "url": "https://github.com/moxie-lean/generators/issues"
   },
-  "homepage": "https://github.com/moxie-leean/generators#readme",
+  "homepage": "https://github.com/moxie-lean/generators#readme",
   "dependencies": {
     "merge": "^1.2.0",
     "mkdirp": "^0.5.1",
