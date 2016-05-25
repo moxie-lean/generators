@@ -6,6 +6,7 @@ var rimraf = require( 'rimraf' );
 var fs = require('fs');
 var replace = require('replace');
 var merge = require('merge');
+var chalk = require('chalk');
 
 module.exports = generators.Base.extend({
 
@@ -20,7 +21,7 @@ module.exports = generators.Base.extend({
     var questions = [
       {
         name: 'name',
-        message: 'The name of the plugin',
+        message: 'Name of the plugin',
         default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
           return !input.isEmpty();
@@ -39,7 +40,7 @@ module.exports = generators.Base.extend({
 
     if ( fs.existsSync(this.PLUGIN_FOLDER) ) {
       if( fs.readdirSync(this.PLUGIN_FOLDER).length ) {
-        console.log('The theme folder already has some files!');
+        console.log('The plugin folder already exists!');
         return;
       }
     } else {
@@ -50,7 +51,6 @@ module.exports = generators.Base.extend({
     process.chdir( this.PLUGIN_FOLDER );
 
     this._downloadPlugin();
-
     this._replaceInPlugin();
   },
 
@@ -98,5 +98,13 @@ module.exports = generators.Base.extend({
     process.chdir( this.PLUGIN_FOLDER );
 
     this.spawnCommandSync('composer', ['update']);
+  },
+
+  end: function(){
+    console.log( chalk.blue('Moving CI and other templates to the root...') );
+    process.chdir('./../../../');
+    fs.renameSync(`${this.PLUGIN_FOLDER}/.github`, './.github');
+    fs.renameSync(`${this.PLUGIN_FOLDER}/.travis.yml`, './.travis.yml');
+    console.log( chalk.green('Completed!') );
   }
 });
