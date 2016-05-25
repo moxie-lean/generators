@@ -11,7 +11,7 @@ module.exports = generators.Base.extend({
 
   initializing: function() {
     this.PLUGIN_FOLDER = this.destinationRoot() + '/wp-content/plugins/';
-    this.PLUGIN_GIT_URI = 'git@github.com:moxie-leean/wp-plugin.git';
+    this.PLUGIN_GIT_URI = 'git@github.com:moxie-lean/wp-plugin.git';
   },
 
   prompts: function() {

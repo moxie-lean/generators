@@ -2,7 +2,7 @@
   "name": "moxie/<%= name %>",
   "require": {
     "php": ">=5.4",
-    "moxie-leean/wp-headless-theme": "dev-master",
+    "moxie-lean/wp-headless-theme": "dev-master",
     "moxie/acf": "dev-master",
     "moxie/gravity-forms": "dev-master",
     "moxie/gravity-forms-logging": "dev-master",
