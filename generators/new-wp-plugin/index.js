@@ -36,36 +36,35 @@ module.exports = generators.Base.extend({
 
   writing: function() {
     this.PLUGIN_FOLDER += this.name;
-    console.log('Creating theme in ' + this.PLUGIN_FOLDER);
+    console.log( chalk.blue('Creating plugin in ' + this.PLUGIN_FOLDER ) );
 
     if ( fs.existsSync(this.PLUGIN_FOLDER) ) {
       if( fs.readdirSync(this.PLUGIN_FOLDER).length ) {
-        console.log('The plugin folder already exists!');
+        console.log( chalk.red('The plugin folder already exists!\n') );
         return;
       }
     } else {
-      console.log('Creating the folder first');
       mkdirp.sync(this.PLUGIN_FOLDER);
     }
 
     process.chdir( this.PLUGIN_FOLDER );
 
+    console.log( chalk.green('Completed!\n') );
     this._downloadPlugin();
     this._replaceInPlugin();
   },
 
   _downloadPlugin: function() {
-    console.log('Downloading plugin files...');
+    console.log( chalk.blue('Downloading plugin files...') );
 
     this.spawnCommandSync('git', ['clone', '--depth=1', this.PLUGIN_GIT_URI, '.']);
-
-    console.log('Cleaning up Git folder...');
-
     this.spawnCommandSync('rm', ['-rf', '.git']);
+
+    console.log( chalk.green('Completed!\n') );
   },
 
   _replaceInPlugin: function() {
-    console.log('Updating namespaces and constants...');
+    console.log( chalk.blue('Updating namespaces and constants...') );
 
     var settings = {
       paths: ['.'],
@@ -92,6 +91,7 @@ module.exports = generators.Base.extend({
       regex: 'lean-p',
       replacement: this.name
     }, settings) );
+    console.log( chalk.green('Completed!\n') );
   },
 
   install: function() {
@@ -105,6 +105,6 @@ module.exports = generators.Base.extend({
     process.chdir('./../../../');
     fs.renameSync(`${this.PLUGIN_FOLDER}/.github`, './.github');
     fs.renameSync(`${this.PLUGIN_FOLDER}/.travis.yml`, './.travis.yml');
-    console.log( chalk.green('Completed!') );
+    console.log( chalk.green('Completed!\n') );
   }
 });
