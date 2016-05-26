@@ -100,6 +100,7 @@ module.exports = generators.Base.extend({
     if ( fs.existsSync('./vendor') ) {
       console.log( chalk.red('Composer has alredy been installed\n') );
     } else {
+      this.spawnCommandSync('composer', ['install']);
       this.spawnCommandSync('composer', ['update']);
     }
   },
