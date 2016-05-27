@@ -3,39 +3,43 @@ var shared = require('../../shared/functions');
 var generators = require('yeoman-generator');
 
 module.exports = generators.Base.extend({
+  constructor: function () {
+    generators.Base.apply(this, arguments);
+  },
+
+  initializing: function () {
+    this.options.projectName = this.options.projectName || '';
+    this.options.repo = '';
+  },
 
   prompts: function() {
     var done = this.async();
-
-    this.name = this.options.name !== undefined ? this.options.name.cleanProjectName() : undefined;
-
-    var questions = [
-      {
-        name: 'name',
+    var questions = [];
+    if ( ! this.options.projectName ) {
+      questions.push({
+        name: 'projectName',
         message: 'The name of the project',
         default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
           return !input.isEmpty();
-        },
-        when: function () {
-          return this.name === undefined;
-        }.bind(this)
-      },
-      {
-        name: 'repo',
-        message: 'The project repo uri (leave blank to skip github/bitbucket setup-up)',
-        default: '',
-        validate: function( input ) {
-          return input.isEmpty() || input.isValidRepo();
         }
-      }
-    ];
+      });
+    }
 
-    this.prompt(questions, function(answers) {
-      this.name = this.name === undefined ? answers.name.cleanProjectName() : this.name;
+    questions.push({
+      name: 'repo',
+      message: 'The project repo uri (leave blank to skip github/bitbucket setup-up)',
+      default: '',
+      validate: function( input ) {
+        return input.isEmpty() || input.isValidRepo();
+      }
+    });
+
+    this.prompt(questions, (answers) => {
+      this.projectName = answers.name ? answers.name.cleanProjectName() : this.options.projectName.cleanProjectName();
       this.repo = answers.repo;
       done();
-    }.bind(this));
+    });
   },
 
   writing: function() {
@@ -44,25 +48,19 @@ module.exports = generators.Base.extend({
     this.fs.copyTpl(
       this.templatePath('composer.json'),
       this.destinationPath('./composer.json'),
-      {
-        name: this.name
-      }
+      { project_name: this.projectName }
     );
 
     this.fs.copyTpl(
       this.templatePath('travis.yml'),
       this.destinationPath('./.travis.yml'),
-      {
-        name: this.name
-      }
+      { project_name: this.projectName }
     );
 
     this.fs.copyTpl(
       this.templatePath('gitignore'),
       this.destinationPath('./.gitignore'),
-      {
-        name: this.name
-      }
+      { project_name: this.projectName }
     );
   },
 
