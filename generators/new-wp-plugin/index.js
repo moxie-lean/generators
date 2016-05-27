@@ -9,38 +9,38 @@ var merge = require('merge');
 
 module.exports = generators.Base.extend({
 
+  constructor: function () {
+    generators.Base.apply(this, arguments);
+  },
+
   initializing: function() {
     this.PLUGIN_FOLDER = this.destinationRoot() + '/wp-content/plugins/';
     this.PLUGIN_GIT_URI = 'git@github.com:moxie-lean/wp-plugin.git';
+    this.options.projectName = this.options.projectName || '';
   },
 
   prompts: function() {
-    var done = this.async();
-
-    this.name = this.options.name !== undefined ? this.options.name.cleanProjectName() : undefined;
-
-    var questions = [
-      {
-        name: 'name',
+    if ( this.options.projectName ) {
+      this.projectName = this.options.projectName.cleanProjectName();
+    } else {
+      var done = this.async();
+      var questions = [{
+        name: 'projectName',
         message: 'The name of the plugin',
         default: shared.getBasename(this.destinationRoot()),
         validate: function(input) {
           return !input.isEmpty();
         },
-        when: function() {
-          return this.name === undefined;
-        }.bind(this)
-      }
-    ];
-
-    this.prompt(questions, function(answers) {
-      this.name = this.name === undefined ? answers.name.cleanProjectName() : this.name;
-      done();
-    }.bind(this));
+      }];
+      this.prompt(questions, function(answers) {
+        this.projectName = answers.projectName.cleanProjectName();
+        done();
+      }.bind(this));
+    }
   },
 
   writing: function() {
-    this.PLUGIN_FOLDER += this.name;
+    this.PLUGIN_FOLDER += this.projectName;
     console.log('Creating plugin in ' + this.PLUGIN_FOLDER);
 
     if (fs.existsSync(this.PLUGIN_FOLDER)) {
@@ -81,28 +81,27 @@ module.exports = generators.Base.extend({
 
     replace(merge({
       regex: 'Leanp',
-      replacement: this.name.capitalizeAtHyphens()
+      replacement: this.projectName.capitalizeAtHyphens()
     }, settings));
 
     replace(merge({
       regex: 'LEANP',
-      replacement: this.name.removeNonWordChars().toUpperCase()
+      replacement: this.projectName.removeNonWordChars().toUpperCase()
     }, settings));
 
     replace(merge({
       regex: 'leanp',
-      replacement: this.name.removeNonWordChars().toLowerCase()
+      replacement: this.projectName.removeNonWordChars().toLowerCase()
     }, settings));
 
     replace(merge({
       regex: 'lean-p',
-      replacement: this.name
+      replacement: this.projectName
     }, settings));
   },
 
   install: function() {
     process.chdir(this.PLUGIN_FOLDER);
-
     this.spawnCommandSync('composer', ['update']);
   },
 
