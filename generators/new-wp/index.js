@@ -6,7 +6,6 @@ module.exports = generators.Base.extend({
 
   prompts: function() {
     var done = this.async();
-
     var questions = [
       {
         name: 'name',
@@ -18,17 +17,16 @@ module.exports = generators.Base.extend({
       }
     ];
 
-    this.prompt(questions, function(answers) {
-      this.name = answers.name.cleanProjectName();
+    this.prompt(questions, (answers) => {
+      this.projectName = answers.name.cleanProjectName();
       done();
-    }.bind(this));
+    });
   },
 
-  compose: function() {
-    var options = { options: {
-      name: this.name
-    }};
-
+  install: function() {
+    var options = {
+      options: { projectName: this.projectName }
+    };
     this.composeWith('moxie-lean:new-wp-project', options);
     this.composeWith('moxie-lean:new-wp-plugin', options);
   }
