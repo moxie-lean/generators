@@ -1,5 +1,5 @@
 {
-  "name": "moxie/<%= name %>",
+  "name": "moxie/<%= project_name %>",
   "require": {
     "php": ">=5.4",
     "moxie-lean/wp-headless-theme": "dev-master",

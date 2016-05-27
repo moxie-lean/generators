@@ -4,7 +4,7 @@ php:
   - 5.4
 
 before_install:
-  - cd wp-content/plugins/<%= name %>/
+  - cd wp-content/plugins/<%= project_name %>/
 
 install:
   - composer self-update;
@@ -12,7 +12,7 @@ install:
 
 cache:
   directories:
-  - wp-content/plugins/<%= name %>/vendor
+  - wp-content/plugins/<%= project_name %>/vendor
 
 script:
   - composer ci
