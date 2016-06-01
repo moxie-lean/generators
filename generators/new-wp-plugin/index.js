@@ -6,6 +6,7 @@ var rimraf = require( 'rimraf' );
 var fs = require('fs');
 var replace = require('replace');
 var merge = require('merge');
+var chalk = require('chalk');
 
 module.exports = generators.Base.extend({
 
@@ -20,7 +21,7 @@ module.exports = generators.Base.extend({
     var questions = [
       {
         name: 'name',
-        message: 'The name of the plugin',
+        message: 'Name of the plugin',
         default: shared.getBasename( this.destinationRoot() ),
         validate: function( input ) {
           return !input.isEmpty();
@@ -35,37 +36,35 @@ module.exports = generators.Base.extend({
 
   writing: function() {
     this.PLUGIN_FOLDER += this.name;
-    console.log('Creating theme in ' + this.PLUGIN_FOLDER);
+    console.log( chalk.blue('Creating plugin in ' + this.PLUGIN_FOLDER ) );
 
     if ( fs.existsSync(this.PLUGIN_FOLDER) ) {
       if( fs.readdirSync(this.PLUGIN_FOLDER).length ) {
-        console.log('The theme folder already has some files!');
+        console.log( chalk.red('The plugin folder already exists!\n') );
         return;
       }
     } else {
-      console.log('Creating the folder first');
       mkdirp.sync(this.PLUGIN_FOLDER);
     }
 
     process.chdir( this.PLUGIN_FOLDER );
 
+    console.log( chalk.green('Completed!\n') );
     this._downloadPlugin();
-
     this._replaceInPlugin();
   },
 
   _downloadPlugin: function() {
-    console.log('Downloading plugin files...');
+    console.log( chalk.blue('Downloading plugin files...') );
 
     this.spawnCommandSync('git', ['clone', '--depth=1', this.PLUGIN_GIT_URI, '.']);
-
-    console.log('Cleaning up Git folder...');
-
     this.spawnCommandSync('rm', ['-rf', '.git']);
+
+    console.log( chalk.green('Completed!\n') );
   },
 
   _replaceInPlugin: function() {
-    console.log('Updating namespaces and constants...');
+    console.log( chalk.blue('Updating namespaces and constants...') );
 
     var settings = {
       paths: ['.'],
@@ -92,11 +91,18 @@ module.exports = generators.Base.extend({
       regex: 'lean-p',
       replacement: this.name
     }, settings) );
+    console.log( chalk.green('Completed!\n') );
   },
 
   install: function() {
     process.chdir( this.PLUGIN_FOLDER );
 
-    this.spawnCommandSync('composer', ['update']);
-  }
+    if ( fs.existsSync('./vendor') ) {
+      console.log( chalk.red('Composer has alredy been installed\n') );
+    } else {
+      this.spawnCommandSync('composer', ['install']);
+      this.spawnCommandSync('composer', ['update']);
+      console.log( chalk.green('Completed!\n') );
+    }
+i  },
 });

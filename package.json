@@ -37,5 +37,8 @@
     "rimraf": "^2.5.2",
     "yeoman-generator": "^0.22.5",
     "yosay": "^1.1.0"
+  },
+  "devDependencies": {
+    "chalk": "^1.1.3"
   }
 }
