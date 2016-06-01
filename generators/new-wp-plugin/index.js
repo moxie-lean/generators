@@ -102,22 +102,7 @@ module.exports = generators.Base.extend({
     } else {
       this.spawnCommandSync('composer', ['install']);
       this.spawnCommandSync('composer', ['update']);
+      console.log( chalk.green('Completed!\n') );
     }
-  },
-
-  end: function(){
-    console.log( chalk.blue('Moving CI and other templates to the root...') );
-    process.chdir('./../../../');
-    if ( fs.existsSync('./.github') ) {
-      console.log( chalk.red('GH Templates has been moved.\n') );
-    } else {
-      fs.renameSync(`${this.PLUGIN_FOLDER}/.github`, './.github');
-    }
-    if ( fs.existsSync('./.travis.yml') ) {
-      console.log( chalk.red('Travis already exist.\n') );
-    } else {
-      fs.renameSync(`${this.PLUGIN_FOLDER}/.travis.yml`, './.travis.yml');
-    }
-    console.log( chalk.green('Completed!\n') );
-  }
+i  },
 });
