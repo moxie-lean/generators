@@ -16,7 +16,8 @@
     "wpackagist-plugin/broken-link-checker": "*",
     "wpackagist-plugin/postmark-approved-wordpress-plugin": "*",
     "wpackagist-plugin/mainwp-child": "*",
-    "wpackagist-plugin/akismet": "*"
+    "wpackagist-plugin/akismet": "*",
+    "wpackagist-plugin/rest-api": "dev-trunk"
   },
   "script": {
     "post-update-cmd": "cd wp-content/plugins/wordpress-seo && composer install"
