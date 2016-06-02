@@ -4,21 +4,23 @@
 
 ## Requirements
 
-## Installation
+- [Node](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+- [Yeoman](https://github.com/yeoman/yo)
 
-To install the generator:
+## Installation
 
 ```bash
 npm install -g generator-moxie-lean
 ```
 
-## Update 
+## Update
    
 ```bash
 npm update -g generator-moxie-lean
 ```
 
-## Instructions & Commands
+## Commands
 
 - [new-wp](#yo-moxie-leannew-wp): Generates a new WordPress project.
 - [new-wp-project](#yo-moxie-leannew-wp-project): Generates the config for a new WordPress project and initialises Git.
@@ -27,13 +29,11 @@ npm update -g generator-moxie-lean
 
 ### yo moxie-lean
 
-> This is the main command that is triggered when we ran `yo moxie-lean` on the
-console.
-
+> This is the main command.
 
 ### yo moxie-lean:new-wp
 
-> This generator creates a new WordPress project, including root level config and Lean plugin.
+> This generator creates a new WordPress project, including root level config and [Lean plugin](https://github.com/moxie-lean/wp-plugin).
 
 **Command**
 
@@ -43,7 +43,7 @@ yo moxie-lean:new-wp
 
 It will prompt you for:
 
-- the project name 
+- The project name 
 - github/bitbucket repo uri. (optional)
 
 **Note:** that the plugin will take the same name as the project.
@@ -51,7 +51,7 @@ You should use a lowercase name separated with -'s.
 
 ### yo moxie-lean:new-wp-project
 
-> Generates the config we need for a WordPress project.
+> Generates the config files required for a WordPress project.
 
 **Command**
 
