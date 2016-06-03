@@ -2,7 +2,7 @@ require('../../shared/string');
 var shared = require('../../shared/functions');
 var generators = require('yeoman-generator');
 var mkdirp = require('mkdirp');
-var rimraf = require( 'rimraf' );
+var rimraf = require('rimraf');
 var fs = require('fs');
 var replace = require('replace');
 var merge = require('merge');
@@ -10,28 +10,34 @@ var chalk = require('chalk');
 
 module.exports = generators.Base.extend({
 
-  initializing: function () {
+  constructor: function () {
+    generators.Base.apply(this, arguments);
+  },
+
+  initializing: function() {
     this.PLUGIN_FOLDER = this.destinationRoot() + '/wp-content/plugins/';
     this.PLUGIN_GIT_URI = 'git@github.com:moxie-lean/wp-plugin.git';
+    this.options.projectName = this.options.projectName || '';
   },
 
   prompts: function() {
-    var done = this.async();
-
-    var questions = [
-      {
-        name: 'name',
-        message: 'Name of the plugin',
-        default: shared.getBasename( this.destinationRoot() ),
-        validate: function( input ) {
+    if ( this.options.projectName ) {
+      this.projectName = this.options.projectName.cleanProjectName();
+    } else {
+      var done = this.async();
+      var questions = [{
+        name: 'projectName',
+        message: 'The name of the plugin',
+        default: shared.getBasename(this.destinationRoot()),
+        validate: function(input) {
           return !input.isEmpty();
-        }
-      }
-    ];
-    this.prompt(questions, function(answers) {
-      this.name = answers.name.cleanProjectName();
-      done();
-    }.bind(this));
+        },
+      }];
+      this.prompt(questions, function(answers) {
+        this.projectName = answers.projectName.cleanProjectName();
+        done();
+      }.bind(this));
+    }
   },
 
   writing: function() {
@@ -47,7 +53,7 @@ module.exports = generators.Base.extend({
       mkdirp.sync(this.PLUGIN_FOLDER);
     }
 
-    process.chdir( this.PLUGIN_FOLDER );
+    process.chdir(this.PLUGIN_FOLDER);
 
     console.log( chalk.green('Completed!\n') );
     this._downloadPlugin();
@@ -72,22 +78,22 @@ module.exports = generators.Base.extend({
       silent: true
     };
 
-    replace( merge({
+    replace(merge({
       regex: 'Leanp',
-      replacement: this.name.capitalizeAtHyphens()
-    }, settings) );
+      replacement: this.projectName.capitalizeAtHyphens()
+    }, settings));
 
-    replace( merge({
+    replace(merge({
       regex: 'LEANP',
-      replacement: this.name.removeNonWordChars().toUpperCase()
-    }, settings) );
+      replacement: this.projectName.removeNonWordChars().toUpperCase()
+    }, settings));
 
-    replace( merge({
+    replace(merge({
       regex: 'leanp',
-      replacement: this.name.removeNonWordChars().toLowerCase()
-    }, settings) );
+      replacement: this.projectName.removeNonWordChars().toLowerCase()
+    }, settings));
 
-    replace( merge({
+    replace(merge({
       regex: 'lean-p',
       replacement: this.name
     }, settings) );
@@ -104,5 +110,8 @@ module.exports = generators.Base.extend({
       this.spawnCommandSync('composer', ['update']);
       console.log( chalk.green('Completed!\n') );
     }
-i  },
+  },
+  end: function() {
+    console.log( chalk.green('** The plugin is all set! **') );
+  }
 });

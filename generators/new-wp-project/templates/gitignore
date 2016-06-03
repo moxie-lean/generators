@@ -28,4 +28,4 @@ wp-content/*
 /wp-content/plugins/*
 
 ### Except our plugin
-!/wp-content/plugins/<%= name %>
+!/wp-content/plugins/<%= project_name %>
