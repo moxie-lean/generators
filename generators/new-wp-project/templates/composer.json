@@ -8,19 +8,17 @@
     "moxie/gravity-forms-logging": "dev-master",
     "moxie/wp-migrate-db-pro": "dev-master",
     "moxie/wp-migrate-db-pro-media-files": "dev-master",
-    "moxie/wp-migrate-db-pro-cli": "dev-master",
-    "yoast/wordpress-seo": "*",
+    "wpackagist-plugin/rest-api": "dev-trunk",
+    "wpackagist-plugin/regenerate-thumbnails": "*"
+  },
+  "require-dev": {
+    "yoast/wordpress-seo": "^3.2",
     "wpackagist-plugin/stream": "*",
-    "wpackagist-plugin/regenerate-thumbnails": "*",
     "wpackagist-plugin/wp-help": "*",
     "wpackagist-plugin/broken-link-checker": "*",
     "wpackagist-plugin/postmark-approved-wordpress-plugin": "*",
     "wpackagist-plugin/mainwp-child": "*",
-    "wpackagist-plugin/akismet": "*",
-    "wpackagist-plugin/rest-api": "dev-trunk"
-  },
-  "script": {
-    "post-update-cmd": "cd wp-content/plugins/wordpress-seo && composer install"
+    "wpackagist-plugin/akismet": "*"
   },
   "authors": [
     {
