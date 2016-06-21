@@ -31,14 +31,11 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "http://packagist.getmoxied.net"
+      "url": "https://packagist.getmoxied.net"
     },
     {
       "type": "composer",
       "url": "https://wpackagist.org"
     }
-  ],
-  "config": {
-    "secure-http": false
-  }
+  ]
 }
