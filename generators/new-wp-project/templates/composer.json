@@ -3,9 +3,9 @@
   "require": {
     "php": ">=5.4",
     "moxie-lean/wp-headless-theme": "dev-master",
-    "moxie/acf": "dev-master",
-    "moxie/gravity-forms": "dev-master",
-    "moxie/gravity-forms-logging": "dev-master",
+    "moxie/advanced-custom-fields-pro": "dev-master",
+    "moxie/gravityforms": "dev-master",
+    "moxie/gravityformslogging": "dev-master",
     "moxie/wp-migrate-db-pro": "dev-master",
     "moxie/wp-migrate-db-pro-media-files": "dev-master",
     "moxie/wp-migrate-db-pro-cli": "dev-master",
