@@ -1,18 +1,17 @@
-sudo: false
 language: php
 php:
-  - 5.4
+  - 5.6
 
-before_install:
-  - cd wp-content/plugins/<%= project_name %>/
-
-install:
-  - composer self-update;
-  - composer install;
+before_script:
+- composer self-update -n 
+- cd wp-content/themes/<%= project_name %>/
+- composer install -n
+- travis_retry npm install
 
 cache:
   directories:
-  - wp-content/plugins/<%= project_name %>/vendor
+    - wp-content/themes/<%= project_name %>/vendor
+    - wp-content/themes/<%= project_name %>/node_modules
 
 script:
-  - composer ci
+  - composer lint && npm run lint -s
