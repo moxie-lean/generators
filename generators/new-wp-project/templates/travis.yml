@@ -3,7 +3,7 @@ php:
   - 5.6
 
 before_script:
-- composer self-update -n 
+- composer self-update -n
 - cd wp-content/themes/<%= project_name %>/
 - composer install -n
 - travis_retry npm install
@@ -14,4 +14,4 @@ cache:
     - wp-content/themes/<%= project_name %>/node_modules
 
 script:
-  - composer lint && npm run lint -s
+  - composer lint
