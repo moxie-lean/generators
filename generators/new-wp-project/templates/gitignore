@@ -21,11 +21,14 @@ node_modules/
 ### Ignore everything in the "wp-content" directory
 wp-content/*
 
-# Except plugins
+# Except themes and plugins
+!/wp-content/themes/
 !/wp-content/plugins/
 
-### Ignore everything in the "plugins" directory
+### Ignore everything in the themes and plugins directories
+/wp-content/themes/*
 /wp-content/plugins/*
 
-### Except our plugin
+### Except our theme and plugin
+!/wp-content/themes/<%= project_name %>
 !/wp-content/plugins/<%= project_name %>

@@ -1,31 +1,34 @@
 {
-  "name": "moxie/<%= project_name %>",
+  "name": "nolte/<%= project_name %>",
   "require": {
     "php": ">=5.4",
-    "moxie-lean/wp-headless-theme": "dev-master",
     "moxie/advanced-custom-fields-pro": "dev-master",
+    "moxie-lean/acf-gravity-forms-select": "0.1.0",
     "moxie/gravityforms": "dev-master",
     "moxie/gravityformslogging": "dev-master",
     "moxie/wp-migrate-db-pro": "dev-master",
     "moxie/wp-migrate-db-pro-media-files": "dev-master",
     "moxie/wp-migrate-db-pro-cli": "dev-master",
     "yoast/wordpress-seo": "*",
-    "wpackagist-plugin/stream": "*",
-    "wpackagist-plugin/regenerate-thumbnails": "*",
-    "wpackagist-plugin/wp-help": "*",
-    "wpackagist-plugin/broken-link-checker": "*",
-    "wpackagist-plugin/postmark-approved-wordpress-plugin": "*",
-    "wpackagist-plugin/mainwp-child": "*",
-    "wpackagist-plugin/akismet": "*",
-    "wpackagist-plugin/rest-api": "dev-trunk"
+    "wpackagist-plugin/stream": "dev-trunk",
+    "wpackagist-plugin/regenerate-thumbnails": "dev-trunk",
+    "wpackagist-plugin/wp-help": "dev-trunk",
+    "wpackagist-plugin/broken-link-checker": "dev-trunk",
+    "wpackagist-plugin/postmark-approved-wordpress-plugin": "dev-trunk",
+    "wpackagist-plugin/mainwp-child": "dev-trunk",
+    "wpackagist-plugin/akismet": "dev-trunk",
+    "wpackagist-plugin/acf-image-crop-add-on": "dev-trunk"
   },
   "script": {
-    "post-update-cmd": "cd wp-content/plugins/wordpress-seo && composer install"
+    "install-wordpress-seo": "cd ./wp-content/plugins/wordpress-seo && composer install",
+    "install-gravity-forms-select": "cd ./wp-content/plugins/acf-gravity-forms-select && composer install && composer update",
+    "post-install-cmd": [ "@install-gravity-forms-select", "@install-wordpress-seo" ],
+    "post-update-cmd": "@install-gravity-forms-select"
   },
   "authors": [
     {
-      "name": "Moxie Developers",
-      "email": "developer@getmoxied.net"
+      "name": "Nolte Developers",
+      "email": "developer@WeAreNolte.com"
     }
   ],
   "repositories": [
