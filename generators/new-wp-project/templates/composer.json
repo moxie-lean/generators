@@ -17,7 +17,8 @@
     "wpackagist-plugin/postmark-approved-wordpress-plugin": "dev-trunk",
     "wpackagist-plugin/mainwp-child": "dev-trunk",
     "wpackagist-plugin/akismet": "dev-trunk",
-    "wpackagist-plugin/acf-image-crop-add-on": "dev-trunk"
+    "wpackagist-plugin/acf-image-crop-add-on": "dev-trunk",
+    "wpackagist-plugin/svg-support": "dev-trunk"
   },
   "script": {
     "install-wordpress-seo": "cd ./wp-content/plugins/wordpress-seo && composer install",
